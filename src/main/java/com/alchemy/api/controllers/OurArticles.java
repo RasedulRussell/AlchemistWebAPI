@@ -1,43 +1,26 @@
 package com.alchemy.api.controllers;
 
+import com.alchemy.api.FetchData;
 import com.alchemy.api.models.Article;
+import com.alchemy.api.models.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class OurArticles {
 
+    @Autowired
+    FetchData fetchData;
 
-    @RequestMapping(value = "articles", method = RequestMethod.GET)
-    public List<Article> getArticles(){
-
-        var article =  new Article();
-        article.setId(1);
-        article.setDetail("Hello detail");
-        article.setTitle("title");
-
-        var article1 =  new Article();
-        article1.setId(2);
-        article1.setDetail("Hello detail");
-        article1.setTitle("title");
-
-        var list = new ArrayList<Article>();
-        list.add(article);
-        list.add(article1);
-
-        return list;
+    @RequestMapping(value = "article", method = RequestMethod.GET)
+    public ArrayList<Article> getArticle() {
+        return fetchData.findAll();
     }
 
-
-    @RequestMapping(value = "articles/{id}", method = RequestMethod.GET)
-    public Article getArticle(@PathVariable("id") int id){
-        var article =  new Article();
-        article.setId(id);
-        article.setDetail("Hello detail");
-        article.setTitle("title");
-
-        return article;
+    @RequestMapping(value = "id", method = RequestMethod.GET)
+    public int getId() {
+        return 16007;
     }
 }
