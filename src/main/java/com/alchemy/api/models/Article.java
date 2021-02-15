@@ -13,8 +13,6 @@ public class Article {
     private String id;
     @Column(name = "title")
     private String title;
-    ///@Column(name = "rawDetails")
-    ///private Blob rawDetails;
     @Column(name = "details")
     private String details;
     @Column(name = "url")
@@ -33,13 +31,6 @@ public class Article {
     public void setTitle(String title) {
         this.title = title;
     }
-//    public Blob getRawDetails() {
-//        return rawDetails;
-//    }
-//
-//    public void setRawDetails(Blob rawDetails) {
-//        this.rawDetails = rawDetails;
-//    }
 
     public String getDetails() {
         return details;
