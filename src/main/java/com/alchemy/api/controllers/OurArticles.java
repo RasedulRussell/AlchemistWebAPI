@@ -3,9 +3,12 @@ package com.alchemy.api.controllers;
 import com.alchemy.api.FetchData;
 import com.alchemy.api.models.Article;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.ArrayList;
+
 
 @RestController
 public class OurArticles {
@@ -13,7 +16,7 @@ public class OurArticles {
     @Autowired
     FetchData fetchData;
 
-    @RequestMapping(value = "article", method = RequestMethod.GET)
+    @RequestMapping(value = "articles", method = RequestMethod.GET)
     public ArrayList<Article> getArticle() {
         return fetchData.findAll();
     }
@@ -32,4 +35,5 @@ public class OurArticles {
     public int getId() {
         return 16007;
     }
+
 }
