@@ -15,3 +15,6 @@ The following guides illustrate how to use some features concretely:
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
 
+###The Network Adapter could not establish the connection
+to check my lisener is sleep or not (lsnrctl status)
+to wake lisener (lsnrctl start)

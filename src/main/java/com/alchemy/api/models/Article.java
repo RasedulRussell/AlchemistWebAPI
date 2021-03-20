@@ -17,6 +17,17 @@ public class Article {
     private String details;
     @Column(name = "url")
     private String url;
+    @Column(name = "category")
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 
     public String getId() { return id; }
 

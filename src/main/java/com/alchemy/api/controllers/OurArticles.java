@@ -4,6 +4,7 @@ import com.alchemy.api.FetchData;
 import com.alchemy.api.models.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -21,19 +22,9 @@ public class OurArticles {
         return fetchData.findAll();
     }
 
-    @RequestMapping(value = "details", method = RequestMethod.GET)
-    public ArrayList<String> findAllDetails() {
-        return fetchData.getDetails();
-    }
-
-    @RequestMapping(value = "url", method = RequestMethod.GET)
-    public ArrayList<String> getUrl() {
-        return fetchData.getUrl();
-    }
-
-    @RequestMapping(value = "id", method = RequestMethod.GET)
-    public int getId() {
-        return 16007;
+    @RequestMapping(value = "articles/{category}", method = RequestMethod.GET)
+    public ArrayList<Article> findSportsNews(@PathVariable("category") String category){
+        return fetchData.findArticleByCategory(category);
     }
 
 }

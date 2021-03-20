@@ -12,10 +12,6 @@ public interface FetchData extends JpaRepository<Article, String> {
     @Override
     ArrayList<Article> findAll();
 
-    @Query("select article.details from Article article")
-    ArrayList<String> getDetails();
-
-    @Query("select article.url from Article article")
-    ArrayList<String> getUrl();
+    ArrayList<Article> findArticleByCategory(String sports);
 
 }
