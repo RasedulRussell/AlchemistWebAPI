@@ -19,6 +19,16 @@ public class Article {
     private String url;
     @Column(name = "category")
     private String category;
+    @Column(name = "mediaurl")
+    private String mediaurl;
+
+    public String getMediaurl() {
+        return mediaurl;
+    }
+
+    public void setMediaurl(String mediaurl) {
+        this.mediaurl = mediaurl;
+    }
 
     public String getCategory() {
         return category;
