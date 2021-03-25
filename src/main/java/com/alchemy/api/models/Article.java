@@ -1,7 +1,10 @@
 package com.alchemy.api.models;
 
+import oracle.sql.TIMESTAMP;
+
 import javax.persistence.*;
 import java.sql.Blob;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "Article")
@@ -21,6 +24,9 @@ public class Article {
     private String category;
     @Column(name = "mediaurl")
     private String mediaurl;
+    @Column(name = "createdtime")
+    private Timestamp publishTime;
+
 
     public String getMediaurl() {
         return mediaurl;
@@ -67,5 +73,13 @@ public class Article {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Timestamp getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(Timestamp publishTime) {
+        this.publishTime = publishTime;
     }
 }
