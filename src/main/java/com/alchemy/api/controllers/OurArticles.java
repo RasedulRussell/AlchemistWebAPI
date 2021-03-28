@@ -31,4 +31,9 @@ public class OurArticles {
         return fetchData.findArticleByCategory(category, pageable);
     }
 
+    @RequestMapping(value = "articles/{category}", method = RequestMethod.GET)
+    public ArrayList<Article> findNewsByCategory(@PathVariable("category") String category) {
+        return fetchData.findArticleByCategory(category);
+    }
+
 }
