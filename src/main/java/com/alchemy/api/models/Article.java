@@ -1,12 +1,13 @@
 package com.alchemy.api.models;
 
-import oracle.sql.TIMESTAMP;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 @Entity
+@Indexed
 @Table(name = "Article")
 
 public class Article {
@@ -51,6 +52,7 @@ public class Article {
         this.id = id;
     }
 
+    @Field
     public String getTitle() {
         return title;
     }
@@ -59,6 +61,7 @@ public class Article {
         this.title = title;
     }
 
+    @Field
     public String getDetails() {
         return details;
     }

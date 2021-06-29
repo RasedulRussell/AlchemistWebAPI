@@ -1,22 +1,24 @@
 package com.alchemy.api.controllers;
 
 import com.alchemy.api.FetchData;
+import com.alchemy.api.LuceneIndexTest;
 import com.alchemy.api.models.Article;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 
 
 @RestController
 public class OurArticles {
 
+    private final LuceneIndexTest luceneIndexTest = new LuceneIndexTest();
+    @Autowired
+    EntityManager entityManager;
     @Autowired
     FetchData fetchData;
 
@@ -36,4 +38,8 @@ public class OurArticles {
         return fetchData.findArticleByCategory(category);
     }
 
+    @RequestMapping(value="search/{key}", method = RequestMethod.GET)
+    public ArrayList<Article> findSearchNews(@PathVariable("key") String key) {
+        return luceneIndexTest.getSearchData(key, entityManager);
+    }
 }
