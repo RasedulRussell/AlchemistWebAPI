@@ -3,18 +3,16 @@ package com.alchemy.api;
 import com.alchemy.api.models.Article;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.hibernate.service.spi.InjectService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 public class LuceneIndexTest {
 
     @Test
-    public ArrayList<Article> getSearchData(String key, EntityManager entityManager) {
+    public List<Article> getSearchData(String key, EntityManager entityManager) {
 
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
 
@@ -41,8 +39,14 @@ public class LuceneIndexTest {
 
         org.hibernate.search.jpa.FullTextQuery fullTextQuery =
                 fullTextEntityManager.createFullTextQuery(query, Article.class);
+        var searchResult = fullTextQuery.getResultList();
 
-        ArrayList<Article> articles = (ArrayList<Article>) fullTextQuery.getResultList();
-        return articles;
+        if(searchResult == null) return Collections.emptyList();
+
+        var articles = (List<Article>) searchResult;
+        var sorted = articles.stream()
+                .sorted(Comparator.comparing(Article::getPublishTime).reversed())
+                .collect(Collectors.toList());
+        return sorted;
     }
 }

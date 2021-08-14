@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -23,8 +27,11 @@ public class OurArticles {
     FetchData fetchData;
 
     @RequestMapping(value = "articles", method = RequestMethod.GET)
-    public ArrayList<Article> getArticle() {
-        return fetchData.findAll();
+    public List<Article> getArticle() {
+        List<Article> articles = fetchData.findAll();
+        return articles.stream()
+                .sorted(Comparator.comparing(Article::getPublishTime).reversed())
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value = "articles/{category}/{pageNo}", method = RequestMethod.GET)
@@ -34,12 +41,15 @@ public class OurArticles {
     }
 
     @RequestMapping(value = "articles/{category}", method = RequestMethod.GET)
-    public ArrayList<Article> findNewsByCategory(@PathVariable("category") String category) {
-        return fetchData.findArticleByCategory(category);
+    public List<Article> findNewsByCategory(@PathVariable("category") String category) {
+        List<Article> articles =  fetchData.findArticleByCategory(category);
+        return articles.stream()
+                .sorted(Comparator.comparing(Article::getPublishTime).reversed())
+                .collect(Collectors.toList());
     }
 
-    @RequestMapping(value="search/{key}", method = RequestMethod.GET)
-    public ArrayList<Article> findSearchNews(@PathVariable("key") String key) {
+    @RequestMapping(value="/news/search/{key}", method = RequestMethod.GET)
+    public List<Article> findSearchNews(@PathVariable("key") String key) {
         return luceneIndexTest.getSearchData(key, entityManager);
     }
 }

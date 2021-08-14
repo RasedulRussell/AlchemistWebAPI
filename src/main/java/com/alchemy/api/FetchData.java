@@ -6,13 +6,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public interface FetchData extends PagingAndSortingRepository<Article, String> {
     @Override
-    ArrayList<Article> findAll();
+    List<Article> findAll();
 
-    ArrayList<Article> findArticleByCategory(String sports);
+    List<Article> findArticleByCategory(String sports);
 
     ArrayList<Article> findArticleByCategory(String category, Pageable pageable);
 }

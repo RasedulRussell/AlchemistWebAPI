@@ -17,7 +17,6 @@ public class LuceneIndexServiceBean {
         try{
             fullTextEntityManager.createIndexer().startAndWait();
         }catch(InterruptedException e){
-            System.out.println("here");
             throw new RuntimeException(e);
         }
     }
