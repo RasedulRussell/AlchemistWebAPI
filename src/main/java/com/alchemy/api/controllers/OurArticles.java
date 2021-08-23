@@ -52,4 +52,13 @@ public class OurArticles {
     public List<Article> findSearchNews(@PathVariable("key") String key) {
         return luceneIndexTest.getSearchData(key, entityManager);
     }
+    @RequestMapping(value = "/marque", method = RequestMethod.GET)
+    public List<Article> findMarque() {
+        List<Article> articles = fetchData.findAll();
+        articles = articles.stream()
+                .sorted(Comparator.comparing(Article::getPublishTime).reversed())
+                .collect(Collectors.toList());
+
+        return articles.stream().limit(30).collect(Collectors.toList());
+    }
 }
