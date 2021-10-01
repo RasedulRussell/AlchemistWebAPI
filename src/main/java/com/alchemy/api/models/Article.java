@@ -6,6 +6,8 @@ import org.hibernate.search.annotations.Indexed;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+
+
 @Entity
 @Indexed
 @Table(name = "Article")
